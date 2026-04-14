@@ -1,13 +1,13 @@
 {
   "name": "lttb-js",
-  "version": "1.0.1",
-  "description": "High-performance, memory-efficient LTTB library. It is designed to downsample massive datasets from thousands, millions or hundreds of millions of points without crashing your runtime or requiring massive RAM overhead.",
+  "version": "1.0.2",
+  "description": "High-performance, memory-efficient LTTB library, designed to downsample massive datasets with thousands, millions, or hundreds of millions of points while keeping memory usage to a minimum.",
   "keywords": [
     "lttb",
     "downsample",
     "chart"
   ],
-  "homepage": "https://github.com/david-minaya/lttb-js#readme",
+  "homepage": "https://github.com/david-minaya/lttb-js",
   "bugs": {
     "url": "https://github.com/david-minaya/lttb-js/issues"
   },

@@ -1,6 +1,8 @@
 # lttb-js
 
-`lttb-js` is a high-performance, memory-efficient implementation of the Largest-Triangle-Three-Buckets (LTTB) algorithm. It is designed to downsample massive datasets from thousands, millions or hundreds of millions of points without crashing your runtime or requiring massive RAM overhead.
+[![NPM Version](https://img.shields.io/npm/v/lttb-js)](https://www.npmjs.com/package/lttb-js)
+
+`lttb-js` is a high-performance, memory-efficient implementation of the Largest-Triangle-Three-Buckets (LTTB) algorithm, designed to downsample massive datasets with thousands, millions, or hundreds of millions of points while keeping memory usage to a minimum.
 
 ### Performance tests
 
@@ -51,7 +53,7 @@ const result = await lttbStream(
   datasetLength, 
   threshold, 
   batchSize, 
-  async function* (offset: number, size: number) {
+  async function* (offset, size) {
     // Stream the data from an API, a database, or another source
     const stream = await streamDataFromDatabase(offset, size);
 
@@ -69,7 +71,7 @@ The `lttbStream` function loads the data as it processes it, preventing load the
 If your API or database doesn't support streaming, you can fetch the data normally and pass it to `lttbStream` in the following way:
 
 ```ts
-const result = await lttbStream(..., async function* (offset: number, size: number) {
+const result = await lttbStream(..., async function* (offset, size) {
 
   // Fetch the data from an API, a database, or another source
   const data = await fetchDataFromDatabase(offset, size);
@@ -85,7 +87,7 @@ Notice that here we are using a normal `for` loop and not `for await`.
 Or, if your data already arrives in the `{ x: number, y: number }` format, you can pass it directly using `yield*`:
 
 ```ts
-const result = await lttbStream(..., async function* (offset: number, size: number) {
+const result = await lttbStream(..., async function* (offset, size) {
   // Fetch the data from an API, a database, or another source
   const data = await fetchDataFromDatabase(offset, size);
   yield* data;
@@ -119,7 +121,7 @@ lttbStream(
 - **batchSize**: The number of items to load each time.
 - **streamFunction**: Function called to load more data.
 
-### `Point`
+### Point
 
 ```ts
 interface Point {
