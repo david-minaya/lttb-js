@@ -1,0 +1,24 @@
+{
+  "name": "lttb-js",
+  "version": "1.0.0",
+  "description": "High-performance, memory-efficient LTTB library. It is designed to downsample massive datasets from thousands, millions or hundreds of millions of points without crashing your runtime or requiring massive RAM overhead.",
+  "keywords": [
+    "lttb",
+    "downsample",
+    "chart"
+  ],
+  "license": "ISC",
+  "author": "David Minaya (davidminaya04@gmail.com)",
+  "type": "module",
+  "exports": {
+    "*": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2"
+  }
+}
