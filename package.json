@@ -7,9 +7,18 @@
     "downsample",
     "chart"
   ],
+  "homepage": "https://github.com/david-minaya/lttb-js#readme",
+  "bugs": {
+    "url": "https://github.com/david-minaya/lttb-js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/david-minaya/lttb-js.git"
+  },
   "license": "ISC",
   "author": "David Minaya (davidminaya04@gmail.com)",
   "type": "module",
+  "main": "./dist/index.js",
   "exports": {
     "*": "./dist/index.js"
   },
