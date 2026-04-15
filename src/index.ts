@@ -1,5 +1,7 @@
 import { LTTB, type Point, type StreamFunction } from './lttb.ts';
 
+export { type Point } from './lttb.ts';
+
 export function lttb(items: Point[], threshold: number) {
   return new LTTB(items, threshold).process();
 }
