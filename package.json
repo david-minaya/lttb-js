@@ -1,6 +1,6 @@
 {
   "name": "lttb-js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "High-performance, memory-efficient LTTB library, designed to downsample massive datasets with thousands, millions, or hundreds of millions of points while keeping memory usage to a minimum.",
   "keywords": [
     "lttb",

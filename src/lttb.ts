@@ -33,6 +33,8 @@ export class LTTB {
 
   async process(): Promise<Point[]> {
 
+    if (this.length === 0) return [];
+
     await this.loadData();
 
     const firstBucket = this.buckets[0];
