@@ -21,8 +21,8 @@ export class LTTB {
   constructor(itemsOrLength: number | Point[], threshold: number, batchSize = 1000, stream?: StreamFunction) {
     const isNumber = typeof itemsOrLength === 'number';
     this.length = isNumber ? itemsOrLength : itemsOrLength.length;
-    this.threshold = threshold;
-    this.bucketSize = (this.length - 2) / (threshold - 2);
+    this.threshold = Math.min(threshold, this.length);
+    this.bucketSize = (this.length - 2) / (this.threshold - 2);
     this.batchBucketSize = Math.max(Math.ceil(batchSize / this.bucketSize), 3);
     this.stream = stream;
     this.buckets = new Array(this.threshold);
