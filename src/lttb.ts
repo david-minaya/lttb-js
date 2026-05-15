@@ -1,3 +1,5 @@
+import { inspect } from 'node:util';
+
 export interface Point {
   x: number;
   y: number;
@@ -139,20 +141,20 @@ export class LTTB {
     if (!this.stream) return;
 
     const size = Math.min(Math.ceil(this.bucketSize * this.batchBucketSize), this.length - this.lastItemIndex);
-    const items: AsyncGenerator<Point, Point> = this.stream(this.lastItemIndex, size) as AsyncGenerator<Point, any>;
+    const items = this.stream(this.lastItemIndex, size);
 
     for (let i = this.lastBucketIndex; i < Math.min(this.batchBucketSize + this.lastBucketIndex, this.buckets.length); i++) {
 
       if (i === 0) {
-        const item = await items.next();
-        this.buckets[0] = new Float64Array([item.value.x, item.value.y]);
+        const item = await this.getNextItem(items);
+        this.buckets[0] = new Float64Array([item.x, item.y]);
         this.lastItemIndex++;
         continue;
       }
 
       if (i === this.buckets.length - 1) {
-        const item = await items.next();
-        this.buckets[i] = new Float64Array([item.value.x, item.value.y]);
+        const item = await this.getNextItem(items);
+        this.buckets[i] = new Float64Array([item.x, item.y]);
         this.lastItemIndex++;
         continue;
       }
@@ -163,9 +165,9 @@ export class LTTB {
       const bucket = new Float64Array(size);
 
       for (let i = 0; i < size; i += 2) {
-        const item = await items.next();
-        bucket[i] = item.value.x;
-        bucket[i+1] = item.value.y;
+        const item = await this.getNextItem(items);
+        bucket[i] = item.x;
+        bucket[i+1] = item.y;
         this.lastItemIndex++;
       }
 
@@ -176,5 +178,13 @@ export class LTTB {
 
     // Consume the leftover items of the stream
     for await (const item of items) {}
+  }
+
+  private async getNextItem(items: AsyncGenerator<Point, void>) {
+    const item = await items.next();
+    if (!item.value) throw new Error('Invalid point: undefined');
+    if (isNaN(item.value.x)) throw new Error(`Invalid point. x isn\'t a number: ${inspect(item.value)}`);
+    if (isNaN(item.value.y)) throw new Error(`Invalid point. y isn\'t a number: ${inspect(item.value)}`);
+    return item.value;
   }
 }

@@ -6,11 +6,10 @@
 
 ### Performance tests
 
-| Container | Memory limit | Dataset length | Dataset size (Approx.) |
-|-----------|--------------|----------------|------------------------|
-| node:slim | 50 MB        | 109,548,080    | 1.7 GB                 |
-| node:slim | 100 MB       | 1,095,480,800  | 16.8 GB                |
-
+| Container | Dataset                 | Memory limit |
+|-----------|-------------------------|--------------|
+| node:slim | 100,000,000 (4.2 GB)    | 50 MB        |
+| node:slim | 1,000,000,000 (42 GB)   | 150 MB       |
 
 ## Installation
 
@@ -72,7 +71,6 @@ If your API or database doesn't support streaming, you can fetch the data normal
 
 ```ts
 const result = await lttbStream(..., async function* (offset, size) {
-
   // Fetch the data from an API, a database, or another source
   const data = await fetchDataFromDatabase(offset, size);
 
